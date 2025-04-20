@@ -361,7 +361,7 @@ const FullMap: React.FC<FullMapProps> = () => {
   }, [playingUrl, isPlaying, stopPlayback, allRadioStations]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-[100dvh] overflow-hidden">
       <audio ref={audioRef} className="hidden" preload="none" />
       
       <MapContainer 
@@ -392,8 +392,8 @@ const FullMap: React.FC<FullMapProps> = () => {
       </MapContainer>
       
       <div className="absolute top-0 left-0 right-0 z-[5000] pointer-events-none">
-        <div className="container mx-auto p-4 flex justify-between items-start">
-          <div className="pointer-events-auto">
+        <div className="container mx-auto p-2 sm:p-4 flex flex-col gap-2 sm:flex-row sm:gap-0 justify-between items-start">
+          <div className="pointer-events-auto w-full sm:w-auto">
             <div className="bg-card/80 backdrop-blur-sm p-3 rounded-md shadow-lg border border-mapaccent-blue/20">
               <h1 className="text-lg font-bold text-maptext flex items-center gap-2 mb-1">
                 <Radio size={20} className="text-mapaccent-blue" />
@@ -405,7 +405,7 @@ const FullMap: React.FC<FullMapProps> = () => {
             </div>
           </div>
           
-          <div className="flex flex-col space-y-2 items-end pointer-events-auto">
+          <div className="flex flex-row sm:flex-col space-x-2 sm:space-x-0 sm:space-y-2 items-center sm:items-end pointer-events-auto w-full sm:w-auto justify-end">
             <div className="bg-card/80 backdrop-blur-sm p-2 rounded-md shadow-lg border border-mapaccent-blue/20 flex items-center gap-2">
               <button 
                 className={`p-1.5 rounded-md bg-mapaccent-blue/20 text-mapaccent-blue hover:bg-mapaccent-blue/30 transition-colors ${isLoadingBalloons ? 'animate-spin' : ''}`}
@@ -438,8 +438,8 @@ const FullMap: React.FC<FullMapProps> = () => {
       <AnimatePresence>
   {selectedBalloon && (
     <motion.div
-      className="absolute bottom-4 left-0 right-0 mx-auto z-[9999]"
-      style={{ maxWidth: "400px", width: "90%" }}
+      className="absolute bottom-6 left-0 right-0 mx-auto z-[9999]"
+      style={{ maxWidth: "360px", width: "90%" }}
       initial={{ y: "100%", opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: "100%", opacity: 0 }}

@@ -26,8 +26,8 @@ const BalloonMarker: React.FC<BalloonMarkerProps> = ({
   const markerIcon = useMemo(() => {
     return divIcon({
       className: markerClassName,
-      iconSize: isSelected ? [8, 8] : [4, 4], 
-      iconAnchor: isSelected ? [4, 4] : [2, 2],
+      iconSize: isSelected ? [10, 10] : [6, 6], 
+      iconAnchor: isSelected ? [5, 5] : [3, 3],
       html: ''
     });
   }, [isSelected, markerClassName, balloon.id]);

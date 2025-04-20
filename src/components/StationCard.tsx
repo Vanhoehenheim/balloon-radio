@@ -47,10 +47,10 @@ const StationCard: React.FC<StationCardProps> = ({
     <div className={`max-w-sm ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300 w-full`}>
       <Card className="bg-black/90 backdrop-blur-md border border-blue-500/20 shadow-lg shadow-black/30 rounded-lg overflow-hidden">
         
-        <div className="px-4 pt-4 pb-3 flex justify-between items-start">
+        <div className="px-3 pt-3 pb-2 flex justify-between items-start">
           <div className="flex-grow min-w-0 pr-2">
             <div className="flex items-center">
-              <div className="bg-blue-500/20 p-1.5 rounded-md mr-3">
+              <div className="bg-blue-500/20 p-1.5 rounded-md mr-2">
                 <Radio className="h-4 w-4 text-blue-400" />
               </div>
               <div>
@@ -66,7 +66,7 @@ const StationCard: React.FC<StationCardProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 rounded-full hover:bg-white/10 text-gray-400 hover:text-white"
+            className="h-8 w-8 rounded-full hover:bg-white/10 text-gray-400 hover:text-white flex-shrink-0"
             onClick={handleClose}
             aria-label="Close card"
           >
@@ -75,8 +75,8 @@ const StationCard: React.FC<StationCardProps> = ({
         </div>
         
         
-        <div className="px-4 pb-3">
-          <div className="flex items-center text-xs text-gray-400 mb-2">
+        <div className="px-3 pb-2">
+          <div className="flex items-center text-xs text-gray-400 mb-1">
             <MapPin className="h-3 w-3 mr-1 text-blue-400" />
             <span>
               {balloon.lat.toFixed(3)}°, {balloon.lng.toFixed(3)}°
@@ -99,38 +99,38 @@ const StationCard: React.FC<StationCardProps> = ({
         
         
         <CardContent className="p-0">
-          <div className="bg-gray-900/50 px-4 py-2 border-t border-b border-blue-500/10">
+          <div className="bg-gray-900/50 px-3 py-1.5 border-t border-b border-blue-500/10">
             <h4 className="text-xs font-medium text-gray-300 flex items-center">
               <Compass size={12} className="mr-1.5 text-blue-400" />
               NEARBY STATIONS ({stations.length > 0 ? stations.length : 0})
             </h4>
           </div>
           
-          <ScrollArea className="max-h-40 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500">
+          <ScrollArea className="max-h-36 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500">
             {stations.length > 0 ? (
-              <ul className="py-2">
+              <ul className="py-1">
                 {stations.map((station) => {
                   const stationUrl = station.url_resolved || station.url;
                   const isCurrentlyPlaying = playingUrl === stationUrl && isPlaying;
                   return (
                     <li 
                       key={station.stationuuid} 
-                      className={`flex items-center justify-between gap-2 py-1.5 px-4 hover:bg-blue-500/5 transition-colors ${isCurrentlyPlaying ? 'bg-blue-500/10' : ''}`}
+                      className={`flex items-center justify-between gap-2 py-1 px-3 hover:bg-blue-500/5 transition-colors ${isCurrentlyPlaying ? 'bg-blue-500/10' : ''}`}
                     >
                       <div className="flex items-center gap-2 overflow-hidden min-w-0">
                         {station.favicon ? (
                           <img
                             src={station.favicon}
                             alt=""
-                            className="h-6 w-6 rounded-sm object-cover flex-shrink-0"
+                            className="h-5 w-5 rounded-sm object-cover flex-shrink-0"
                             onError={(e) => {
                               (e.target as HTMLImageElement).style.display='none'; 
                               (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
                             }}
                           />
                         ) : (
-                          <div className="h-6 w-6 rounded-sm bg-gray-800 flex items-center justify-center flex-shrink-0">
-                            <Radio className="h-3 w-3 text-gray-500" />
+                          <div className="h-5 w-5 rounded-sm bg-gray-800 flex items-center justify-center flex-shrink-0">
+                            <Radio className="h-2.5 w-2.5 text-gray-500" />
                           </div>
                         )}
                         <div className="flex flex-col min-w-0">
@@ -143,7 +143,7 @@ const StationCard: React.FC<StationCardProps> = ({
                       <Button
                         size="icon" 
                         variant="ghost"
-                        className={`h-7 w-7 rounded-full ${isCurrentlyPlaying ? 'bg-blue-500 text-white hover:bg-blue-600' : 'text-blue-400 hover:bg-blue-500/10'} ${!stationUrl ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`h-7 w-7 rounded-full flex-shrink-0 ${isCurrentlyPlaying ? 'bg-blue-500 text-white hover:bg-blue-600' : 'text-blue-400 hover:bg-blue-500/10'} ${!stationUrl ? 'opacity-50 cursor-not-allowed' : ''}`}
                         onClick={() => onPlayPause(station)}
                         disabled={!stationUrl}
                         title={isCurrentlyPlaying ? 'Pause Station' : 'Play Station'}
@@ -160,7 +160,7 @@ const StationCard: React.FC<StationCardProps> = ({
                 })}
               </ul>
             ) : (
-              <div className="flex flex-col items-center justify-center py-8 text-center text-gray-400">
+              <div className="flex flex-col items-center justify-center py-6 text-center text-gray-400">
                 <WifiOff size={20} className="mb-2 opacity-50"/>
                 <p className="text-xs">No stations available in this area</p>
               </div>
