@@ -1,0 +1,202 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 215 25% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 215 25% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-mapbg text-maptext m-0 p-0 overflow-hidden;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  html, #root {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Custom marker styling - using proper Leaflet classes */
+  .balloon-marker {
+    background-color: rgb(59, 130, 246);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(59, 130, 246, 0.5);
+    border: none;
+  }
+
+  .balloon-marker-selected {
+    background-color: rgb(52, 211, 153);
+    box-shadow: 0 0 15px 4px rgba(52, 211, 153, 0.7);
+    z-index: 1000 !important;
+  }
+
+  /* Leaflet Custom Styles */
+  .leaflet-container {
+    @apply bg-mapbg h-full w-full;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .leaflet-control-zoom {
+    @apply !border-mapaccent-blue/20;
+  }
+
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    @apply !bg-card/80 !text-maptext !border-mapaccent-blue/20;
+  }
+
+  .leaflet-control-zoom-in:hover,
+  .leaflet-control-zoom-out:hover {
+    @apply !bg-mapaccent-blue/20;
+  }
+
+  .leaflet-control-attribution {
+    @apply !bg-card/80 !text-xs !text-maptext/60;
+  }
+  
+  /* Fix marker z-index issues */
+  .leaflet-marker-pane {
+    z-index: 600;
+  }
+  
+  .leaflet-tooltip-pane {
+    z-index: 650;
+  }
+  
+  .leaflet-popup-pane {
+    z-index: 700;
+  }
+  
+  /* Improve panning behavior */
+  .leaflet-grab {
+    cursor: grab;
+  }
+  
+  .leaflet-dragging .leaflet-grab {
+    cursor: grabbing;
+  }
+}
+
+/* Add a pulse animation to make the balloons more visible */
+@keyframes balloon-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pulse-glow {
+  animation: balloon-pulse 2s ease-in-out infinite;
+}
+
+/* Card animations */
+@keyframes card-enter {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes card-exit {
+  from { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+.animate-card-enter {
+  animation: card-enter 0.3s ease forwards;
+}
+
+.animate-card-exit {
+  animation: card-exit 0.3s ease forwards;
+}
